@@ -28,11 +28,11 @@
 	        <tr ng-repeat='project in projects'>
 	        	<td>{{project.name}}</td>
 	        	<td ng-repeat='day in days'>
-	        		<form ng-submit="addTime()">
+	        		<form>
 	        			<!-- <input value='{{project.id}}' />
 	        			<input value="{{day | date:'shortDate'}}" /> -->
 
-		        		<input size='1' ng-model="(times | filter:{project_id:project.id})[0].time" />
+		        		<input size='1' ng-model="allTimes[project.id][$index]" ng-change="addTime(day,project,$index)"/>
 
 		        		<!-- <input size='1' ng-model="times | filter: time_filter" /> -->
 		        	</form>
@@ -48,7 +48,9 @@
         </table>
 
         <ul>
-        	<li ng-repeat='time in times'>{{time.track_date|date:'shortDate'}}</li>
+        	<li ng-repeat='time in times'>
+            {{time.track_date|date:'shortDate'}} id : {{time.project_id}} time : {{time.time}}
+            </li>
         </ul>
 	</div>
 </body>
